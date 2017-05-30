@@ -1,0 +1,27 @@
+version: '3'
+services:
+ mixxx:
+  build:
+   context: .
+   args:
+   - USR=${HOST_USER}
+  image: mixxx-lean
+  container_name: mixxx
+  privileged: true
+  environment:
+  - DISPLAY=${DISPLAY}
+  - XAUTHORITY=/tmp/.docker.xauth
+  - QT_X11_NO_MITSHM=1
+  volumes:
+  - /home/${HOST_USER}/Music:/home/${HOST_USER}/Music
+  - home:/home/${HOST_USER}
+  - src:/home/${HOST_USER}/src
+  - /tmp/.X11-unix:/tmp/.X11-unix
+  - /etc/shadow:/etc/shadow
+  - /dev:/dev
+
+volumes: 
+ home:
+  driver: local
+ src:
+  driver: local
